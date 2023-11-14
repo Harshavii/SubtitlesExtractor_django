@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from .utils import upload_to_s3, parse_srt, store_dynamodb, search
 from django.shortcuts import render, redirect
-# from .tasks import process_video
-# from celery.result import AsyncResult
 import subprocess
 import secrets
 import os
@@ -76,13 +74,3 @@ def extract_subtitles(request):
 
     return render(request, 'index.html')
 
-
-# def processing_status(request, task_id):
-#     result = AsyncResult(task_id)
-#     if result.ready():
-#         # Task has completed, get the result
-#         subtitles, video_file_path, matching_segments, search_phrase = result.get()
-#         return render(request, 'index.html', {'subtitles': subtitles, 'video_file': video_file_path, 'matching_segments': matching_segments, 'search_phrase': search_phrase})
-#     else:
-#         # Task is still running
-#         return render(request, 'processing.html', {'task_id': task_id})
