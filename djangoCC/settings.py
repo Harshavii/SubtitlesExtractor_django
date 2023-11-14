@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-ajfrb2h!1t*6a9*a0p*zp(u6sd^h)-v#n27mhg1i99sl9d%n1n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['subtitles-extractor.onrender.com', '127.0.0.1']
 
 
 # Application definition
