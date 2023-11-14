@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .utils import upload_to_s3, parse_srt, store_dynamodb, search
 from django.shortcuts import render, redirect
-from .tasks import process_video
+# from .tasks import process_video
 # from celery.result import AsyncResult
 import subprocess
 import secrets
