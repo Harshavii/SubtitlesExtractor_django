@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 import subprocess
 import secrets
 import os
+from django.conf import settings
 
 # BUCKET NAME
 bucket_name = 'subtitle4bucket'
@@ -38,9 +39,15 @@ def extract_subtitles(request):
             # UPLOADING VIDEO TO S3
             object_key = f'videos/{unique_filename}'
             upload_to_s3(temp_file_path, bucket_name, object_key)
-    
 
-            ccextractor_path = "djangoCC\CCExtractor_bin\ccextractorwinfull.exe"
+            base_path = os.path.dirname(os.path.abspath(__file__))
+            # print(base_path)
+            ccextractor_path = os.path.join(base_path, "CCExtractor_bin", "ccextractorwinfull.exe")
+            # print(ccextractor_path)
+
+
+
+            # ccextractor_path = r"djangoCC\ccextractorwinfull.exe"
             command = [ccextractor_path, temp_file_path, "-o", f"{aa}.srt"]
             try:
                 result = subprocess.run(command, capture_output=True, text=True, check=True)
@@ -56,6 +63,8 @@ def extract_subtitles(request):
                 print("subtitles uploaded to dynamo db table")  
 
                 # Pass the video file path to the HTML page
+                # path = settings.BASE_DIR
+                # print(path)
                 video_file_path = r'C:\Users\harsh\OneDrive\Desktop\Django_CC\djangoCC\temp_videos' + unique_filename
 
                 search_phrase = request.POST.get('search_phrase', '')
