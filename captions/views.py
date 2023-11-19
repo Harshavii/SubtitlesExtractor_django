@@ -40,7 +40,7 @@ def extract_subtitles(request):
             upload_to_s3(temp_file_path, bucket_name, object_key)
     
 
-            ccextractor_path = "C:\\Users\\harsh\\OneDrive\\Desktop\\Django_CC\\djangoCC\\CCExtractor_bin\\ccextractorwinfull.exe"
+            ccextractor_path = "djangoCC\CCExtractor_bin\ccextractorwinfull.exe"
             command = [ccextractor_path, temp_file_path, "-o", f"{aa}.srt"]
             try:
                 result = subprocess.run(command, capture_output=True, text=True, check=True)
